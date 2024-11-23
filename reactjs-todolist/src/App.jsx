@@ -1,7 +1,11 @@
+import Form from './components/Form';
+import ToDoList from './components/ToDoList';
+
 function App() {
 	return (
 		<div>
-			<h1 className="text-4xl text-red-400 font-bold">Hello World!</h1>
+			<Form />
+			<ToDoList />
 		</div>
 	);
 }
