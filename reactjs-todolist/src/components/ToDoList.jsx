@@ -3,12 +3,12 @@ function ToDoList(props) {
 	return (
 		<div className="flex justify-center">
 			<div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
-				<ul>
+				<ul className="space-y-4">
 					{props.tasks.map(item => {
 						return (
-							<li key={item.id} className="flex justify-between items-center border-b-1 border-gray-200">
-								<input type="checkbox" className="text-xl cursor-pointer" />
-								<p className="flex-1 text-gray-700 text-start px-3">{item.task}</p>
+							<li key={item.id} className="flex justify-between items-center border-b-1 border-gray-200 ">
+								<input type="checkbox" className="text-xl cursor-pointer accent-blue-900" checked={item.isCompleted} onChange={() => props.setIsCompleted(item.id)} />
+								<p className={`flex-1 text-start px-3 ${item.isCompleted ? 'line-through text-gray-500 decoration-2 decoration-blue-950' : 'text-blue-950'}`}>{item.task}</p>
 								<div className="flex space-x-2">
 									<button className="text-gray-500 hover:text-gray-700">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

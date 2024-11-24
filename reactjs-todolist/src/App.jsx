@@ -26,10 +26,18 @@ function App() {
 		setTasks([...tasks, data]);
 	}
 
+	function setIsCompleted(id) {
+		setTasks(item => {
+			const updatedTasks = item.map(task => (task.id === id ? { ...task, isCompleted: !task.isCompleted } : task));
+
+			return updatedTasks;
+		});
+	}
+
 	return (
 		<div>
 			<Form addTask={addTask} newTask={newTask} />
-			<ToDoList tasks={tasks} />
+			<ToDoList tasks={tasks} setIsCompleted={setIsCompleted} />
 		</div>
 	);
 }
