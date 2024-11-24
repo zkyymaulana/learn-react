@@ -1,10 +1,21 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Form from './components/Form';
 import ToDoList from './components/ToDoList';
 
 function App() {
 	const newTask = useRef('');
-	const [tasks, setTasks] = useState([]);
+	const STORAGE = 'TODOLIST_APP';
+	const [tasks, setTasks] = useState(() => {
+		return JSON.parse(localStorage.getItem(STORAGE)) || [];
+	});
+
+	const [taskIsCompleted, setTaskIsCompleted] = useState(0);
+
+	useEffect(() => {
+		localStorage.setItem(STORAGE, JSON.stringify(tasks));
+		const complete = tasks.filter(item => item.isCompleted == true).length;
+		setTaskIsCompleted(complete);
+	}, [tasks]);
 
 	function setId() {
 		if (tasks.length === 0) {
@@ -64,7 +75,7 @@ function App() {
 
 	return (
 		<div>
-			<Form addTask={addTask} newTask={newTask} />
+			<Form addTask={addTask} newTask={newTask} taskIsCompleted={taskIsCompleted} tasks={tasks} />
 			<ToDoList tasks={tasks} setIsCompleted={setIsCompleted} move={move} remove={removeTask} edit={editTask} />
 		</div>
 	);

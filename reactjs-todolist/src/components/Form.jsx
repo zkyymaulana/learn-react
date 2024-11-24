@@ -5,9 +5,12 @@ function Form(props) {
 	return (
 		<div className="flex items-center justify-center p-6 mt-10">
 			<div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
-				<div className="flex items-center justify-center gap-2">
-					<img src={logo} alt="Logo" className="mb-4 w-14" />
-					<h1 className="text-4xl font-semibold text-blue-950 mb-6">MyTask</h1>
+				<div className="flex items-center justify-center gap-2 mb-6">
+					<img src={logo} alt="Logo" className="w-14" />
+					<h1 className="text-4xl font-semibold text-blue-950">MyTask</h1>
+					<span className="bg-blue-900 text-white py-1 px-2 rounded-md ms-2">
+						{props.taskIsCompleted || '0'} / {props.tasks.length}
+					</span>
 				</div>
 				<form action="">
 					<input type="text" ref={props.newTask} placeholder="Add Your Task" className="w-full p-2 mb-4 border-b-2 border-gray-300 focus:outline-none text-gray-700 placeholder-gray-400" />
