@@ -41,7 +41,6 @@ function ToDoListButton(props) {
 				onClick={() => {
 					remove(id);
 				}}
-				className="text-red-500 hover:text-red-700"
 			>
 				🗑️
 			</button>
