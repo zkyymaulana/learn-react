@@ -1,4 +1,4 @@
-import Pokemon from './compnents/Pokemon';
+import Pokemon from './components/Pokemon';
 
 function App() {
 	return (
