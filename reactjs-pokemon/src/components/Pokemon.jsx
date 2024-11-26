@@ -6,11 +6,19 @@ function Pokemon() {
 	const [detail, setDetail] = useState(false);
 	const [dataDetail, setDataDetail] = useState();
 
+	// pagination
+	const [prevUrl, setPrevUrl] = useState('');
+	const [nextUrl, setNextUrl] = useState('');
+
+	const [apiUrl, setApiUrl] = useState('https://pokeapi.co/api/v2/pokemon/');
+
 	useEffect(() => {
 		const getAllPokemon = async () => {
-			const apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
 			const resData = await fetch(apiUrl);
 			const jsonData = await resData.json();
+
+			setPrevUrl(jsonData.previous || '');
+			setNextUrl(jsonData.next || '');
 
 			// Fetch semua data detail secara paralel
 			const pokemonDetail = await Promise.all(
@@ -25,7 +33,7 @@ function Pokemon() {
 		};
 
 		getAllPokemon(); // Panggil fungsi untuk memulai fetch
-	}, []);
+	}, [apiUrl]);
 
 	function PokemonDetail() {
 		return (
@@ -39,10 +47,10 @@ function Pokemon() {
 						<img src={dataDetail.sprites.other.dream_world.front_default} alt="Detail Image" />
 					</div>
 
-					<div className="bg-yellow-100 text-gray-800 px-6 py-3 text-lg font-bold">{dataDetail.name}</div>
+					<div className="bg-yellow-100 text-gray-800 px-6 py-3 text-lg font-bold text-center">{dataDetail.name}</div>
 
 					<div className="px-6 py-5 rounded-b-lg">
-						<div className="flex flex-wrap gap-3">
+						<div className="flex flex-wrap gap-3 justify-center">
 							{dataDetail.abilities.map((data, index) => {
 								return (
 									<span key={index} className="bg-gray-300 text-gray-800 px-3 py-1 rounded-lg">
@@ -79,12 +87,43 @@ function Pokemon() {
 								<div className="flex justify-center">
 									<img src={data.sprites?.front_default || ''} alt={data.name} className="w-24 h-24 object-contain" />
 								</div>
-								<div className="capitalize font-bold">{data.name}</div>
+								<div className="capitalize font-bold text-center">{data.name}</div>
 							</div>
 						))}
 					</div>
 				)}
 			</div>
+			{prevUrl && (
+				<div>
+					{/* Pagination Left */}
+					<div className="fixed top-1/2 transform -translate-y-1/2 bg-white p-2 border border-gray-300 rounded-lg z-50 left-[calc((100vw-95%)/2)]">
+						<button
+							className="bg-blue-900 text-white text-2xl p-2 rounded hover:bg-gray-300 hover:text-blue-900"
+							onClick={() => {
+								setApiUrl(prevUrl);
+							}}
+						>
+							&laquo;
+						</button>
+					</div>
+				</div>
+			)}
+
+			{nextUrl && (
+				<div>
+					{/* Pagination Right */}
+					<div className="fixed top-1/2 transform -translate-y-1/2 bg-white p-2 border border-gray-300 rounded-lg z-50 right-[calc((100vw-95%)/2)]">
+						<button
+							className="bg-blue-900 text-white text-2xl p-2 rounded hover:bg-gray-300 hover:text-blue-900"
+							onClick={() => {
+								setApiUrl(nextUrl);
+							}}
+						>
+							&raquo;
+						</button>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
