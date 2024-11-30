@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../assets/logo.png';
 import { IoMdSearch } from 'react-icons/io';
 import { FaCartShopping } from 'react-icons/fa6';
+import DarkMode from './DarkMode';
 
 function Navbar() {
 	return (
@@ -30,6 +31,10 @@ function Navbar() {
 							<span className="group-hover:block hidden transition-all duration-200">Order</span>
 							<FaCartShopping className="text-xl text-white drop-shadow-sm cursor-pointer"></FaCartShopping>
 						</button>
+						{/* Darkmode Switch */}
+						<div>
+							<DarkMode />
+						</div>
 					</div>
 				</div>
 			</div>
