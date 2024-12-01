@@ -57,7 +57,6 @@ export const Hero = () => {
 										<button className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full">Order Now</button>
 									</div>
 								</div>
-								{console.log(data)}
 								{/* Image section */}
 								<div className="order-1 sm:order-2">
 									<div className="relative z-10">
