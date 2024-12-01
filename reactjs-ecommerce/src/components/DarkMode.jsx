@@ -25,8 +25,7 @@ function DarkMode() {
 		<div className="flex items-center">
 			<label className="relative inline-flex items-center cursor-pointer">
 				<input type="checkbox" className="sr-only peer" checked={isDarkMode} onChange={toggleDarkMode} />
-				<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none dark:bg-blue-600 rounded-full peer dark:peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-black dark:after:bg-gray-900 after:border-gray-300 border border-gray-400 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-				<span className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{isDarkMode ? 'Dark' : 'Light'}</span>
+				<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:peer-checked:bg-gradient-to-r from-primary to-secondary peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-black dark:after:bg-gray-900 after:border-gray-300 border border-gray-400 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
 			</label>
 		</div>
 	);
