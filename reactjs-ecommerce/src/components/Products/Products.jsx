@@ -15,42 +15,49 @@ const Products = () => {
 		<div className="mt-14 mb-12">
 			<div className="container">
 				{/* Header section */}
-				<div className="text-center mb-10 max-w-[600px] mx-auto">
+				<div data-aos="fade-up" className="text-center mb-10 max-w-[600px] mx-auto">
 					<p className="text-sm text-primary">Top Selling Products for you</p>
-					<h1 className="text-xl font-bold">Products</h1>
-					<p className="text-xs text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur at eveniet totam! Lorem ipsum dolor sit amet.</p>
+					<h1 data-aos="fade-up" className="text-3xl font-bold">
+						Products
+					</h1>
+					<p data-aos="fade-up" className="text-xs text-gray-400">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur at eveniet totam! Lorem ipsum dolor sit amet.
+					</p>
 				</div>
 				{/* Body section */}
 				<div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
-					{/* Card Section */}
-					{products.length > 0 ? (
-						products.map(product => (
-							<div key={product.id} className="space-y-3 p-4 border rounded-lg shadow-sm hover:shadow-md transition">
+					{[...(products.length > 0 ? products : Array(5).fill({}))] // Gunakan placeholder jika tidak ada produk
+						.sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0)) // Sort jika ada data rating
+						.slice(0, 5)
+						.map((product, index) => (
+							<div
+								data-aos="fade-up"
+								data-aos-delay={index * 300}
+								key={product.id || index} // Gunakan index jika id tidak tersedia
+								className="space-y-3 p-4 border rounded-lg shadow-sm hover:shadow-md transition"
+							>
 								{/* Gambar Produk */}
-								<img src={product.image} alt={product.title} className="h-[220px] w-[150px] object-cover rounded-md mx-auto" />
+								<img
+									src={product.image || '/placeholder.png'} // Placeholder jika gambar tidak tersedia
+									alt={product.title || 'Placeholder'}
+									className="h-[220px] w-[150px] object-cover rounded-md mx-auto"
+								/>
 
 								{/* Informasi Produk */}
 								<div className="space-y-1">
-									{/* Batasi panjang teks title */}
-									<h3 className="font-semibold text-start text-sm">{product.title.length > 20 ? `${product.title.substring(0, 20)}...` : product.title}</h3>
+									<h3 className="font-semibold text-start text-sm">{product.title ? (product.title.length > 20 ? `${product.title.substring(0, 20)}...` : product.title) : 'Product Title'}</h3>
 
-									{/* Harga Produk */}
-									<p className="text-sm text-gray-600 text-start">{product.price.toLocaleString('id-ID', { style: 'currency', currency: 'USD' })}</p>
+									<p className="text-sm text-gray-600 text-start">{product.price ? product.price.toLocaleString('id-ID', { style: 'currency', currency: 'USD' }) : 'N/A'}</p>
 
-									{/* Rating Produk */}
-									<div className="flex items-statext-start justify-start gap-1">
+									<div className="flex items-center justify-start gap-1">
 										<FaStar className="text-yellow-400" />
-										<span className="text-sm">{product.rating.rate.toFixed(1)}</span>
+										<span className="text-sm">{product.rating?.rate ? product.rating.rate.toFixed(1) : '0.0'}</span>
 									</div>
 								</div>
 							</div>
-						))
-					) : (
-						<p className="text-center text-gray-500">No products available.</p>
-					)}
+						))}
 				</div>
 			</div>
-			<div></div>
 		</div>
 	);
 };
