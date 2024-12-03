@@ -27,7 +27,7 @@ const Products = () => {
 				{/* Body section */}
 				<div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
 					{[...(products.length > 0 ? products : Array(5).fill({}))] // Gunakan placeholder jika tidak ada produk
-						.sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0)) // Sort jika ada data rating
+						.sort((a, b) => (b.rating?.count / b.rating?.rate || 0) - (a.rating?.count / a.rating?.rate || 0)) // Sort jika ada data rating
 						.slice(0, 5)
 						.map((product, index) => (
 							<div
